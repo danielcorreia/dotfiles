@@ -1,0 +1,42 @@
+# Navigation
+alias ..="cd .."
+alias ...=" cd ../.."
+alias ....=" cd ../../.."
+
+# Enable alias to be sudoed
+alias sudo="sudo "
+
+# for the lulz
+alias please="sudo "
+
+# Show/hide hidden files on Finder
+alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+
+# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume 7'"
+
+# Postgres
+alias psql="/Applications/Postgres.app/Contents/Versions/9.3/bin/psql"
+
+# Colored ls
+alias ls="ls -G"
+
+# Django
+alias pmrun="python manage.py runserver"
+alias pmshell="python manage.py shell_plus"
+# list of missing migrations
+alias tomigrate="./manage.py migrate --list | grep -v '\[X\]'"
+
+# clean up merge files
+alias clean_orig='find . -type f -name "*.orig" -delete'
+alias clean_pyc='find . -type f -name "*.pyc" -delete'
+
+# mysql start/stop
+alias mysqlstart='mysql.server start'
+alias mysqlstop='mysql.server stop'
+
+alias myiplocal='ipconfig getifaddr en0'
+
+alias vim='nvim'
