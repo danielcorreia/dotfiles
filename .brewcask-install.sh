@@ -13,5 +13,8 @@ brew cask install evernote
 brew cask install slack 
 brew cask install spotify
 brew cask install spotifree
+brew cask install dash
+brew cask install alfred
+brew cask install steam
 
 exit 0
