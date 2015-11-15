@@ -29,6 +29,8 @@ Plugin 'fatih/vim-go', { 'for': 'go' }
 Plugin 'digitaltoad/vim-jade', { 'for': 'jade' }
 Plugin 'groenewege/vim-less', { 'for': 'less' }
 Plugin 'ap/vim-css-color', { 'for': 'css' }
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -38,7 +40,6 @@ filetype plugin indent on    " required
 map <C-n> :NERDTreeToggle<CR>
 " Close NERDTree if it's the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 " Ignore pyc files in NERDTree
 let NERDTreeIgnore = ['\.pyc$']
 
@@ -46,16 +47,26 @@ let NERDTreeIgnore = ['\.pyc$']
 let g:ctrlp_working_path_mode=0
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=*/tmp/*,*.swp,*.zip,*.pyc " Ignore files with ctrlp
+" YouCompleteMe
+" auto-close the preview window after the user accepts the offered completion
+" string
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+" Vim-Go
+" enable goimports to automatically insert import paths instead of gofmt
+let g:got_fmt_command = "goimports"
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+" enable Emmet just for html/css
+let g:user_emmet_install_global = 0
+autocmd FileType html,css EmmetInstall
 
 set clipboard=unnamed  " OS clipboard by default
 set encoding=utf-8 nobomb  " use utf-8 without BOM
@@ -83,13 +94,15 @@ set tm=500
 set title
 
 " start scrolling three lines before the horizontal window border
-set scrolloff=10
+set scrolloff=5
 
 syntax on  " enable syntax highlight
 
 set hlsearch  " highlight search
 set incsearch  " search as characters are entered
-set ignorecase " use case insensitive search, except when using capital letters
+
+" use case insensitive search, except when using capital letters
+set ignorecase
 set smartcase
 
 " instead of failing a command because of unsaved changes, instead 
@@ -142,6 +155,9 @@ set foldnestmax=10  " 10 nested fold max
 " other possible: marker, manual, expr, syntax, diff
 set foldmethod=indent
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
 " automatic commands
 if has("autocmd")
 	" enable file type detection
@@ -156,4 +172,3 @@ endif
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-
