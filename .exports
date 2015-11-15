@@ -17,14 +17,26 @@ export HISTCONTROL='ignoreboth';
 export LANG='en_US.UTF-8';
 export LC_ALL='en_US.UTF-8';
 
-# Highlight section titles in manual pages
-export LESS_TERMCAP_MD="${yellow}";
+# Highlight section titles in manual pages.
+export LESS_TERMCAP_md="${yellow}";
+
+# Don’t clear the screen after quitting a manual page.
+export MANPAGER='less -X';
 
 # Always enable colored `grep` output
 export GREP_OPTIONS='--color=auto';
+
+# Git update
+export PATH="/usr/local/git/bin:$PATH"
+
+# Add python startup script
+export PYTHONSTARTUP="$HOME/.pythonrc"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.envs
 
 # GOpath
-export GOPATH="${HOME}/code/go"
+export GOPATH="$HOME/code/go"
+
+# Add `my` bin to PATH
+export PATH="$HOME/code/bin:$PATH"
