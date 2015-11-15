@@ -1,0 +1,22 @@
+[user]
+	name = 
+	email = 
+[core]
+	excludesfile = /Users/danielcorreia/.gitignore_global
+	editor = vim
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+# Colors in git: http://nathanhoad.net/how-to-colours-in-git
+[alias]
+	st = status -s
+	br = branch
+	ci = commit
+	ds = diff --staged
+	sl = stash list
+	lg = log --pretty=format:'%C(yellow)%h%Creset %C(green dim)%s%Creset%d%Creset [%ad %Cblue%an%Creset]' --graph --date=short
+	last = log --pretty=format:'%C(yellow)%h%Creset %Cblue%s%Creset%d [%ad %an]' -n 1 --graph --date=short
+	lastone = log -n 1 --abbrev-commit
+	logbr = log --first-parent --no-merges
+[push]
+	default = simple
