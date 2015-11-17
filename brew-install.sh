@@ -17,7 +17,10 @@ then
 	if test "$(uname)" = "Darwin"
 	then
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-elif
+	else
+		echo "Can't install Homebrew here!"
+	fi
+else
 	# Make sure we’re using the latest Homebrew.
 	brew update
 
@@ -27,6 +30,7 @@ fi
 
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
+
 # Install Bash 4.
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
 # running `chsh`.
@@ -35,7 +39,28 @@ brew tap homebrew/versions
 brew install bash-completion2
 
 # Install usefull binaries
-brew install git git-flow tree neovim tmux mysql httpie
+brew install git git-flow tree tmux mysql httpie
+
+# Install brew cask
+brew install caskroom/cask/brew-cask
+
+# Give use to brew cask and install apps
+brew cask install google-chrome
+brew cask install firefox
+brew cask install dropbox
+brew cask install iterm2
+brew cask install sublime-text
+brew cask install the-unarchiver
+brew cask install sequel-pro
+brew cask install vlc
+brew cask install transmission
+brew cask install evernote
+brew cask install slack
+brew cask install spotify
+brew cask install spotifree
+brew cask install dash
+brew cask install alfred
+brew cask install steam
 
 brew cleanup
 
