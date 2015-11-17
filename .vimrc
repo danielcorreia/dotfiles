@@ -31,6 +31,8 @@ Plugin 'groenewege/vim-less', { 'for': 'less' }
 Plugin 'ap/vim-css-color', { 'for': 'css' }
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'mattn/emmet-vim'
+" Themes
+Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
