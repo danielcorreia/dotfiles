@@ -39,7 +39,15 @@ brew tap homebrew/versions
 brew install bash-completion2
 
 # Install usefull binaries
-brew install git git-flow tree tmux mysql httpie
+brew install git
+brew install git-flow
+brew install python
+brew install python3
+brew install node
+brew install tree
+brew install tmux
+brew install mysql
+brew install httpie
 
 # Install brew cask
 brew install caskroom/cask/brew-cask
