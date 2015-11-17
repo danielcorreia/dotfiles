@@ -1,0 +1,3 @@
+[submodule "themes/dracula"]
+	path = themes/dracula
+	url = git@github.com:zenorocha/dracula-theme.git
