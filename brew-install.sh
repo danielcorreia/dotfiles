@@ -69,6 +69,7 @@ brew cask install spotifree
 brew cask install dash
 brew cask install alfred
 brew cask install steam
+brew cask install mou
 
 brew cleanup
 
