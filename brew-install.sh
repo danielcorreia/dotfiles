@@ -36,7 +36,7 @@ brew install gnu-sed --with-default-names
 # running `chsh`.
 brew install bash
 brew tap homebrew/versions
-brew install bash-completion2
+brew install bash-completion
 
 # Install usefull binaries
 brew install git
@@ -52,6 +52,7 @@ brew install httpie
 # Install brew cask
 brew install caskroom/cask/brew-cask
 
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # Give use to brew cask and install apps
 brew cask install google-chrome
 brew cask install firefox
