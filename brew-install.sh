@@ -44,10 +44,12 @@ brew install git-flow
 brew install python
 brew install python3
 brew install node
+brew install yarn
+brew install go
+brew install postgresql
 brew install tree
 brew install mysql
 brew install httpie
-brew install visual-studio-code
 
 # Install brew cask
 brew install caskroom/cask/brew-cask
@@ -67,6 +69,7 @@ brew cask install spotify
 brew cask install dash
 brew cask install alfred
 brew cask install steam
+brew cask install visual-studio-code
 
 brew cleanup
 
