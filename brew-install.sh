@@ -50,6 +50,7 @@ brew install postgresql
 brew install tree
 brew install mysql
 brew install httpie
+brew install cmake
 
 # Install brew cask
 brew install caskroom/cask/brew-cask
