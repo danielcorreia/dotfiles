@@ -182,10 +182,18 @@ set backspace=indent,eol,start
 if has("autocmd")
 	" enable file type detection
 	filetype on
+
+	autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+	autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+	autocmd FileType javascript setlocal ts=2 sts=2 sw=2 noexpandtab
 	" treat .json files as .js
 	autocmd BufNewFile,BufRead *.json setfiletype json syntax=javascript
 	" treat .md files as Markdown
 	autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+	" treat .rss files as XML
+	autocmd BufNewFile,BufRead *.rss setfiletype xml
 endif
 
 " in normal mode, type <Leader>tl to swap to the tab you viewed last
