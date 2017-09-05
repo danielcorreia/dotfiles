@@ -192,3 +192,15 @@ endif
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+" Use The Silver Searcher (Ag) over Grep
+if executable('ag')
+	set grepprg=ag\ --nogroup\ --nocolor
+
+	let g:ctrlp_user_command = 'ag -Q -l --nocolor --hidden -g "" %s'
+	let g:ctrlp_use_caching = 0
+	if !exists(":Ag")
+    command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+    nnoremap \ :Ag<SPACE>
+  endif
+endif
