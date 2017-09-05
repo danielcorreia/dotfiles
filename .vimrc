@@ -38,11 +38,17 @@ Plugin 'zenorocha/dracula-theme', {'rtp': 'vim/'}
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Toggle NERDTree
+" NERDTree config
+"" Toggle NERDTree
 map <C-n> :NERDTreeToggle<CR>
-" Close NERDTree if it's the only window left
+"" Open NERDTree when vim starts up if
+"" no files are specified or opening a directory
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+"" Close NERDTree if it's the only window left
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" Ignore pyc files in NERDTree
+"" Ignore pyc files in NERDTree
 let NERDTreeIgnore = ['\.pyc$']
 
 " CtrlP settings
