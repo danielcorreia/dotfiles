@@ -156,6 +156,18 @@ inoremap <F1> <Esc>
 nnoremap <F1> <Esc>
 vnoremap <F1> <Esc>
 
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Get off my lawn
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
 set foldenable  " enable folding
 set foldlevelstart=10  " open most folds by default
 set foldnestmax=10  " 10 nested fold max
