@@ -12,6 +12,7 @@
 	st = status -s
 	br = branch
 	ci = commit
+	co = checkout
 	ds = diff --staged
 	sl = stash list
 	lg = log --pretty=format:'%C(yellow)%h%Creset %C(green dim)%s%Creset%d%Creset [%ad %Cblue%an%Creset]' --graph --date=short
