@@ -33,9 +33,11 @@ def question(sentence, options=None, defaults=None):
 
 
 def bootstrap_dotfiles(home_dir):
+    dotfiles_dir = 'dotfiles'
     for dotfile in DOTFILES:
+        src = os.path.join(home_dir, dotfiles_dir, dotfile)
         dest = os.path.join(home_dir, dotfile)
-        os.symlink(dotfile, dest)
+        os.symlink(src, dest)
 
     print("Created symbolic links for dotfiles in `{}`".format(home_dir))
 
