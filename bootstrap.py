@@ -97,6 +97,20 @@ def setup_git_commit_msg():
     )
 
 
+def setup_iterm_themes():
+    '''Download iterm themes'''
+    call(
+        "curl https://raw.githubusercontent.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Dark.itermcolors "
+        ">> SolarizedDark.itermcolors",
+        shell=True
+    )
+    call(
+        "curl https://raw.githubusercontent.com/altercation/solarized/master/iterm2-colors-solarized/Solarized%20Light.itermcolors "
+        ">> SolarizedLight.itermcolors",
+        shell=True
+    )
+
+
 def main():
     personal_folders()
     bootstrap_dotfiles()
@@ -107,6 +121,7 @@ def main():
     brew_install()
     setup_vundle()
     setup_git_commit_msg()
+    setup_iterm_themes()
 
 if __name__ == '__main__':
     main()
