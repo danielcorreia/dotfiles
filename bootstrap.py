@@ -33,14 +33,11 @@ def question(sentence, options=None, defaults=None):
 
 
 def bootstrap_dotfiles(home_dir):
-    total = len(DOTFILES)
-
-    for index, dotfile in enumerate(DOTFILES):
+    for dotfile in DOTFILES:
         dest = os.path.join(home_dir, dotfile)
+        os.symlink(dotfile, dest)
 
-        shutil.copy(dotfile, dest)
-
-    print("Copied dotfiles to {}".format(home_dir))
+    print("Created symbolic links for dotfiles in `{}`".format(home_dir))
 
 
 def setup_vundle():
