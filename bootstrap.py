@@ -49,11 +49,14 @@ def brew_install():
 
 
 def setup_vundle():
-    subprocess.call("mkdir -p {}".format(os.path.join(HOME_DIR, ".vim/bundle/")), shell=True)
-    subprocess.call([
-        "git clone https://github.com/VundleVim/Vundle.vim.git",
-        os.path.join(HOME_DIR, ".vim/bundle/Vundle.vim")
-    ])
+    vundle_dir = os.path.join(HOME_DIR, ".vim/bundle/Vundle.vim/")
+    subprocess.call("mkdir -p {}".format(vundle_dir), shell=True)
+    subprocess.call(
+        "git clone https://github.com/VundleVim/Vundle.vim.git {}".format(vundle_dir),
+        shell=True
+    )
+    subprocess.call("vim +PluginInstall +qall", shell=True)
+    print("Vundle installed")
 
 
 def setup_git_commit_msg():
