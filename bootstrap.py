@@ -43,6 +43,21 @@ def bootstrap_dotfiles():
 
     print("Created symbolic links for dotfiles in `{}`".format(HOME_DIR))
 
+def setup_vim_themes():
+    '''Setup vim themes
+
+    Download themes and move them to the vim directory
+    '''
+    subprocess.call(
+        "curl https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim "
+        ">> solarized.vim",
+        shell=True
+    )
+    vim_dir = os.path.join(HOME_DIR, ".vim/colors/")
+    subprocess.call("mkdir -p {}".format(vim_dir), shell=True)
+    subprocess.call("mv solarized.vim {}".format(vim_dir), shell=True)
+    print("Copied solarized.vim")
+
 
 def personal_folders():
     folders = [
@@ -85,6 +100,7 @@ def setup_git_commit_msg():
 def main():
     personal_folders()
     bootstrap_dotfiles()
+    setup_vim_themes()
     # order matters here
     # brew must run before setup_vundle so that cmake is installed
     # (required for YouCompleteMe compilation)
