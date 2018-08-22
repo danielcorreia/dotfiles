@@ -72,6 +72,7 @@ brew cask install dash
 brew cask install alfred
 brew cask install steam
 brew cask install visual-studio-code
+brew cask install bitwarden
 
 brew cleanup
 
