@@ -44,6 +44,10 @@ def bootstrap_dotfiles():
     print("Created symbolic links for dotfiles in `{}`".format(HOME_DIR))
 
 
+def brew_install():
+    subprocess.call("brew_install.sh")
+
+
 def setup_vundle():
     subprocess.call("mkdir -p {}".format(os.path.join(HOME_DIR, ".vim/bundle/")), shell=True)
     subprocess.call([
@@ -67,6 +71,10 @@ def setup_git_commit_msg():
 
 def main():
     bootstrap_dotfiles()
+    # order matters here
+    # brew must run before setup_vundle so that cmake is installed
+    # (required for YouCompleteMe compilation)
+    brew_install()
     setup_vundle()
     setup_git_commit_msg()
 
