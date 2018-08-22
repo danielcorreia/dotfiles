@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import os
 import shutil
-import subprocess
+from subprocess import call
 
 commands = {
     'ssh_key': "ssh-keygen -t rsa -b 4096 -C '{email}'"
@@ -48,14 +48,14 @@ def setup_vim_themes():
 
     Download themes and move them to the vim directory
     '''
-    subprocess.call(
+    call(
         "curl https://raw.githubusercontent.com/altercation/vim-colors-solarized/master/colors/solarized.vim "
         ">> solarized.vim",
         shell=True
     )
     vim_dir = os.path.join(HOME_DIR, ".vim/colors/")
-    subprocess.call("mkdir -p {}".format(vim_dir), shell=True)
-    subprocess.call("mv solarized.vim {}".format(vim_dir), shell=True)
+    call("mkdir -p {}".format(vim_dir), shell=True)
+    call("mv solarized.vim {}".format(vim_dir), shell=True)
     print("Copied solarized.vim")
 
 
@@ -65,33 +65,33 @@ def personal_folders():
     ]
     for folder in folders:
         folder_dir = os.path.join(HOME_DIR, folder)
-        subprocess.call("mkdir -p {}".format(folder_dir), shell=True)
+        call("mkdir -p {}".format(folder_dir), shell=True)
     print("Created personal folders")
 
 
 def brew_install():
-    subprocess.call("brew_install.sh")
+    call("brew_install.sh")
 
 
 def setup_vundle():
     vundle_dir = os.path.join(HOME_DIR, ".vim/bundle/Vundle.vim/")
-    subprocess.call("mkdir -p {}".format(vundle_dir), shell=True)
-    subprocess.call(
+    call("mkdir -p {}".format(vundle_dir), shell=True)
+    call(
         "git clone https://github.com/VundleVim/Vundle.vim.git {}".format(vundle_dir),
         shell=True
     )
-    subprocess.call("vim +PluginInstall +qall", shell=True)
+    call("vim +PluginInstall +qall", shell=True)
     print("Vundle installed")
 
 
 def setup_git_commit_msg():
-    subprocess.call(
+    call(
         "curl https://cdn.rawgit.com/danielcorreia/"
         "9cac3cdd66563109156bd4243c7bc4e2/raw/d1c26da58b5859c7e66a93631c847b850bee2386/git_commit_msg.txt"
         ">> ~/.git_commit_msg.txt",
         shell=True
     )
-    subprocess.call(
+    call(
         "git config --global commit.template ~/.git_commit_msg.txt",
         shell=True
     )
