@@ -48,18 +48,17 @@ def setup_vundle():
     )
 
 
-def install_virtualenvwrapper():
-    subprocess.call("pip install virtualenvwrapper".split(' '))
+def setup_git_commit_msg():
+    subprocess.call("http https://cdn.rawgit.com/danielcorreia/9cac3cdd66563109156bd4243c7bc4e2/raw/d1c26da58b5859c7e66a93631c847b850bee2386/git_commit_msg.txt >> ~/.git_commit_msg.txt")
+    subprocess.call("git config --global commit.template ~/.git_commit_msg.txt")
 
 
 def main():
     home_dir = os.path.expanduser('~')
     bootstrap_dotfiles(home_dir)
-    install_virtualenvwrapper()
+    # TODO
     # setup_vundle()
-    subprocess.call("pip install --upgrade pip setuptools".split(' '))
-    subprocess.call("pip3 install --upgrade pip setuptools".split(' '))
-
+    # setup_git_commit_msg()
 
 if __name__ == '__main__':
     main()
