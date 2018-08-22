@@ -74,6 +74,10 @@ brew cask install alfred
 brew cask install steam
 brew cask install visual-studio-code
 brew cask install bitwarden
+# fonts
+brew tap caksroom/fonts
+brew cask install font-source-code-pro
+brew cask install font-inconsolata
 
 brew cleanup
 
