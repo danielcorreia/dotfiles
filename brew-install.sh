@@ -52,6 +52,7 @@ brew install mysql
 brew install httpie
 brew install cmake
 brew install vim
+brew install the_silver_searcher
 
 # Install brew cask
 brew install caskroom/cask/brew-cask
