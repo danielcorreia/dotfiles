@@ -44,6 +44,16 @@ def bootstrap_dotfiles():
     print("Created symbolic links for dotfiles in `{}`".format(HOME_DIR))
 
 
+def personal_folders():
+    folders = [
+        'code/bin',
+    ]
+    for folder in folders:
+        folder_dir = os.path.join(HOME_DIR, folder)
+        subprocess.call("mkdir -p {}".format(folder_dir), shell=True)
+    print("Created personal folders")
+
+
 def brew_install():
     subprocess.call("brew_install.sh")
 
@@ -73,6 +83,7 @@ def setup_git_commit_msg():
 
 
 def main():
+    personal_folders()
     bootstrap_dotfiles()
     # order matters here
     # brew must run before setup_vundle so that cmake is installed
