@@ -23,6 +23,8 @@ DOTFILES = [
     '.vimrc',
 ]
 
+HOME_DIR = os.path.expanduser('~')
+
 
 def question(sentence, options=None, defaults=None):
     if options:
@@ -32,35 +34,41 @@ def question(sentence, options=None, defaults=None):
     answer = raw_input(complete_question)
 
 
-def bootstrap_dotfiles(home_dir):
+def bootstrap_dotfiles():
     dotfiles_dir = 'dotfiles'
     for dotfile in DOTFILES:
-        src = os.path.join(home_dir, dotfiles_dir, dotfile)
-        dest = os.path.join(home_dir, dotfile)
+        src = os.path.join(HOME_DIR, dotfiles_dir, dotfile)
+        dest = os.path.join(HOME_DIR, dotfile)
         os.symlink(src, dest)
 
-    print("Created symbolic links for dotfiles in `{}`".format(home_dir))
+    print("Created symbolic links for dotfiles in `{}`".format(HOME_DIR))
 
 
 def setup_vundle():
-    # FIXME: this creates a folder in this directory called "~"
-    subprocess.call(
-        "git clone https://github.com/VundleVim/Vundle.vim.git "
-        "~/.vim/bundle/Vundle.vim".split(' ')
-    )
+    subprocess.call("mkdir -p {}".format(os.path.join(HOME_DIR, ".vim/bundle/")), shell=True)
+    subprocess.call([
+        "git clone https://github.com/VundleVim/Vundle.vim.git",
+        os.path.join(HOME_DIR, ".vim/bundle/Vundle.vim")
+    ])
 
 
 def setup_git_commit_msg():
-    subprocess.call("http https://cdn.rawgit.com/danielcorreia/9cac3cdd66563109156bd4243c7bc4e2/raw/d1c26da58b5859c7e66a93631c847b850bee2386/git_commit_msg.txt >> ~/.git_commit_msg.txt")
-    subprocess.call("git config --global commit.template ~/.git_commit_msg.txt")
+    subprocess.call(
+        "curl https://cdn.rawgit.com/danielcorreia/"
+        "9cac3cdd66563109156bd4243c7bc4e2/raw/d1c26da58b5859c7e66a93631c847b850bee2386/git_commit_msg.txt"
+        ">> ~/.git_commit_msg.txt",
+        shell=True
+    )
+    subprocess.call(
+        "git config --global commit.template ~/.git_commit_msg.txt",
+        shell=True
+    )
 
 
 def main():
-    home_dir = os.path.expanduser('~')
-    bootstrap_dotfiles(home_dir)
-    # TODO
-    # setup_vundle()
-    # setup_git_commit_msg()
+    bootstrap_dotfiles()
+    setup_vundle()
+    setup_git_commit_msg()
 
 if __name__ == '__main__':
     main()
