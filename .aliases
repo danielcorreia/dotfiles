@@ -67,6 +67,7 @@ alias mysqlrestart="mysqlstop && mysqlstart"
 # clean up
 alias clean_pyc='find . -type f -name "*.pyc" -delete'
 alias clean_orig='find . -type f -name "*.orig" -delete'
+alias clean_log='find . -type f -name "*.log" -delete'
 
 # whats my ip
 alias myiplocal='ipconfig getifaddr en0'
