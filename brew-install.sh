@@ -35,7 +35,6 @@ brew install gnu-sed --with-default-names
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
 # running `chsh`.
 brew install bash
-brew tap homebrew/versions
 brew install bash-completion
 
 # Install usefull binaries
@@ -53,6 +52,7 @@ brew install httpie
 brew install cmake
 brew install vim
 brew install the_silver_searcher
+brew install jq
 
 # Install brew cask
 brew install caskroom/cask/brew-cask
