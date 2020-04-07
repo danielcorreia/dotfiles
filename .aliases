@@ -91,3 +91,6 @@ alias gd="git diff "
 alias gds="git diff --staged "
 # stash
 alias gsl="git stash list "
+
+# Peek into package.json scripts
+alias pjscripts="cat package.json | jq .scripts"
