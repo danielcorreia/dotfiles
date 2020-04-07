@@ -23,9 +23,31 @@ function tomigrate() {
 	"$(manage.py migrate --list " @a ")" | grep -v '[X]';
 }
 
-# Git pull current branch with rebase
+# GIT utilities
+
+## Pull current branch with rebase
+## --autostash stashes your changes and after pulling, applies the stash
 function gpr() {
-	git pull --rebase origin $(git rev-parse --abbrev-ref HEAD)
+	git pull --rebase --autostash origin $(git rev-parse --abbrev-ref HEAD)
+}
+
+## Rebase from latest update on master
+function grm() {
+	CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD) && \
+		git checkout master && \
+		gpr && \
+		git checkout $CURRENT_BRANCH && \
+		git rebase master
+}
+
+## Push changes to remote with force (cancels if there's someone elses work)
+function gpf() {
+  git push --force-with-lease
+}
+
+## change into the git root folder of a project
+function groot {
+  cd $(git rev-parse --show-toplevel)
 }
 
 # Update YouCompleteMe
