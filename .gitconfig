@@ -19,5 +19,15 @@
 	last = log --pretty=format:'%C(yellow)%h%Creset %Cblue%s%Creset%d [%ad %an]' -n 1 --graph --date=short
 	lastone = log -n 1 --abbrev-commit
 	logbr = log --first-parent --no-merges
+	undo = reset HEAD~
 [push]
 	default = simple
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[diff]
+	tool = vscode
+	noprefix = true
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
