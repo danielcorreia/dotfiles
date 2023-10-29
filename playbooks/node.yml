@@ -1,0 +1,19 @@
+---
+- name: Get node version
+  ansible.builtin.shell: node --version
+  register: node_version
+  changed_when: false
+
+- name: Node with nvm
+  when: node_version.stdout != node
+  block:
+    - name: Install nvm
+      when: lookup("env", "NVM_DIR") | length == 0
+      ansible.builtin.shell:
+        "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm }}/install.sh | bash"
+
+    - name: Install expected node version
+      ansible.builtin.shell: '. "$HOME/.nvm/nvm.sh" && nvm install {{ node }}'
+
+    - name: Install yarn
+      ansible.builtin.shell: corepack enable

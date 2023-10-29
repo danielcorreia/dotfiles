@@ -1,0 +1,61 @@
+---
+- name: Install brew packages
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+    update_homebrew: true
+  loop:
+    - deno
+    - fzf
+    - go
+    - jq
+    - python3
+    - ripgrep
+    - tldr
+    - tree
+
+- name: Install apps with brew
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - google-chrome
+    - alfred
+    - docker
+    - iterm2
+    - slack
+    - spotify
+    - whatsapp
+
+- name: Ensure ~/.config exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+
+- name: Ensure ~/work exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/work"
+    state: directory
+
+- name: Ensure ~/personal exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/personal"
+    state: directory
+
+- name: Generate ssh key
+  community.crypto.openssh_keypair:
+    path: "{{ ansible_env.HOME }}/.ssh/id_rsa"
+    passphrase: ""
+    type: rsa
+
+- name: Add FiraCode font
+  ansible.builtin.copy:
+    src: "FiraCode/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/Library/Fonts/"
+  loop:
+    - FiraCodeNerdFont-Bold.ttf
+    - FiraCodeNerdFont-Light.ttf
+    - FiraCodeNerdFont-Medium.ttf
+    - FiraCodeNerdFont-Regular.ttf
+    - FiraCodeNerdFont-Retina.ttf
+    - FiraCodeNerdFont-SemiBold.ttf

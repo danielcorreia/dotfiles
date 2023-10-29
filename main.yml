@@ -1,0 +1,27 @@
+---
+- name: Bootstrap
+  hosts: localhost
+  connection: local
+
+  vars_prompt:
+    - name: email
+      prompt: What's your e-mail?
+      private: false
+
+  tasks:
+    - ansible.builtin.import_tasks: playbooks/macos.yml
+
+    - ansible.builtin.import_tasks: playbooks/system.yml
+
+    - ansible.builtin.import_tasks: playbooks/git.yml
+
+    - ansible.builtin.import_tasks: playbooks/ohmyzsh.yml
+
+    - ansible.builtin.import_tasks: playbooks/tmux.yml
+
+    - ansible.builtin.import_tasks: playbooks/neovim.yml
+
+    - ansible.builtin.import_tasks: playbooks/node.yml
+      vars:
+        nvm: "v0.39.5"
+        node: "v20.9.0"

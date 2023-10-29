@@ -1,0 +1,36 @@
+---
+- name: Check for oh my zsh
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: ohmyzsh_dir
+
+- name: Install oh my zsh
+  when: not ohmyzsh_dir.stat.isdir
+  ansible.builtin.shell: |
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+- name: Configure zsh-autosuggestions plugin
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: '^plugins=\('
+    line: plugins=(git zsh-autosuggestions)
+
+- name: Add zsh aliases
+  ansible.builtin.template:
+    src: templates/aliases.j2
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/aliases.zsh"
+
+- name: Add zsh exports
+  ansible.builtin.template:
+    src: templates/exports.j2
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/exports.zsh"
+
+- name: Add zsh functions
+  ansible.builtin.template:
+    src: templates/functions.j2
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/functions.zsh"

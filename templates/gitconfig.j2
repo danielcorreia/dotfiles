@@ -1,0 +1,22 @@
+[user]
+	name = Daniel Correia
+	email = {{ email }}
+[core]
+	excludesfile = /Users/danielcorreia/.gitignore
+	editor = nvim
+[push]
+	default = simple
+[merge]
+	tool = vscode
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
+[diff]
+	tool = vscode
+	noprefix = true
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+[alias]
+	lg = log --pretty=format:'%C(yellow)%h%Creset %C(green dim)%s%Creset%d%Creset [%ad %Cblue%an%Creset]' --graph --date=short
+	last = log --pretty=format:'%C(yellow)%h%Creset %Cblue%s%Creset%d [%ad %an]' -n 1 --graph --date=short
+	logbr = log --first-parent --no-merges
+	undo = reset HEAD~

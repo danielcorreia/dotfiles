@@ -1,0 +1,82 @@
+---
+- name: Disable press and hold key for accents
+  community.general.osx_defaults:
+    key: ApplePressAndHoldEnabled
+    type: bool
+    value: false
+
+- name: Set low wait time for initial key repeat
+  community.general.osx_defaults:
+    key: InitialKeyRepeat
+    type: float
+    value: 10
+
+- name: Set low wait time for key repeat
+  community.general.osx_defaults:
+    key: KeyRepeat
+    type: float
+    value: 1
+
+- name: Set Finder's to use column view
+  community.general.osx_defaults:
+    domain: com.apple.Finder
+    key: FXPreferredViewStyle
+    type: string
+    value: clmv
+
+- name: Disable "natural" scrolling
+  community.general.osx_defaults:
+    domain: com.apple.swipescrolldirection
+    key: NSGlobalDomain
+    type: bool
+    value: false
+
+- name: Show status bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+
+- name: Show path bar in Finder
+  community.general.osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+
+- name: Use AirDrop over every interface
+  community.general.osx_defaults:
+    domain: com.apple.NetworkBrowser
+    key: BrowseAllInterfaces
+    type: int
+    value: 1
+
+- name: Show the ~/Library folder
+  ansible.builtin.shell: chflags nohidden ~/Library
+  changed_when: false
+
+- name: Auto hide/show Dock
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+
+- name: Set the icon size of Dock items to 36 pixels
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: 36
+
+# - name: Set Dock apps
+#   community.general.osx_defaults:
+#   domain: com.apple.dock
+#   key: persistent-apps
+#   type: array
+#   value:
+#     - "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+
+# - name: Reload dock
+#   ansible.builtin.shell: killall Dock

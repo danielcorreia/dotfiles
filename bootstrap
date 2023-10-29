@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Bootstrap my macbook
+
+brew=$(which brew)
+if [ -z $brew ]; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi;
+
+ansible_playbook=$(which ansible-playbook)
+if [ -z $ansible_playbook ]; then
+  brew install ansible
+fi;
+
+user_email=$([ -z "$DOTFILES_EMAIL" ] && echo "" || echo "email=$DOTFILES_EMAIL")
+
+ansible-playbook main.yml \
+  -e "$user_email"
