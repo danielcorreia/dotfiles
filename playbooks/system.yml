@@ -19,9 +19,10 @@
     name: "{{ item }}"
     state: present
   loop:
-    - google-chrome
     - alfred
+    - authy
     - docker
+    - google-chrome
     - iterm2
     - slack
     - spotify
