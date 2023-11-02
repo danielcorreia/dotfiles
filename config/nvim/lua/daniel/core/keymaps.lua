@@ -1,8 +1,6 @@
 -- set leader key to space
 vim.g.mapleader = " "
 
-local keymap = vim.keymap -- for conciseness
-
 -- automatically indent when moving lines up/down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -24,3 +22,6 @@ vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 -- make a file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+-- move back/forward buffer
+vim.keymap.set("n", "<leader>h", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>")
