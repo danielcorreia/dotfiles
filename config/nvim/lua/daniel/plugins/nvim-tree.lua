@@ -32,7 +32,6 @@ return {
 
 		keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>") -- toggle file explorer
 		keymap.set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>")
-		keymap.set("n", "<leader>ec", "<cmd>NvimTreeToggle<CR>") -- collapse file explorer
 		keymap.set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>") -- refresh file explorer
 	end
 }

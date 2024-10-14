@@ -25,6 +25,7 @@ return {
         "denols",
         "dockerls",
         "emmet_ls",
+        "gopls",
         "graphql",
         "html",
         "lua_ls",
