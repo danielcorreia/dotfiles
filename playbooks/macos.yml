@@ -67,7 +67,7 @@
   community.general.osx_defaults:
     domain: com.apple.dock
     key: tilesize
-    type: int
+    type: float
     value: 36
 
 # - name: Set Dock apps
