@@ -2,6 +2,10 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 wezterm.log_info("reloading")
 
+-- Treat left Alt with composition effect
+-- https://wezfurlong.org/wezterm/config/keyboard-concepts.html?h=send_composed_key_when_left_alt_is_pressed#macos-left-and-right-option-key
+config.send_composed_key_when_left_alt_is_pressed = true
+
 config.font = wezterm.font("MesloLGS NF")
 config.font_size = 18
 
