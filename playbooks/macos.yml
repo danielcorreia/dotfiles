@@ -70,13 +70,12 @@
     type: float
     value: 36
 
-# - name: Set Dock apps
-#   community.general.osx_defaults:
-#   domain: com.apple.dock
-#   key: persistent-apps
-#   type: array
-#   value:
-#     - "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/Google Chrome.app</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>"
+- name: Group windows by application in mission control (good for Aerospace)
+  community.general.osx_defaults:
+    domain: com.apple.dock
+    key: expose-group-apps
+    type: bool
+    value: true
 
-# - name: Reload dock
-#   ansible.builtin.shell: killall Dock
+- name: Reload dock
+  ansible.builtin.shell: killall Dock
