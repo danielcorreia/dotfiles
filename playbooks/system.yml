@@ -5,9 +5,9 @@
     state: present
     update_homebrew: true
   loop:
-    - deno
+    - fastfetch
     - fzf
-    - go
+    - httpie
     - jq
     - python3
     - ripgrep
@@ -20,7 +20,6 @@
     state: present
   loop:
     - alfred
-    - authy
     - docker
     - google-chrome
     - iterm2
