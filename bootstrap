@@ -12,6 +12,8 @@ if [ -z $ansible_playbook ]; then
   brew install ansible
 fi;
 
+# $user_email must exist to be passed to ansible
+# either empty string OR email provided
 user_email=$([ -z "$DOTFILES_EMAIL" ] && echo "" || echo "email=$DOTFILES_EMAIL")
 
 ansible-playbook main.yml \
