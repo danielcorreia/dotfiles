@@ -1,0 +1,16 @@
+---
+- name: Install aerospace package
+  community.general.homebrew_cask:
+    name: aerospace
+    state: present
+
+- name: Ensure ~/.config exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+
+- name: Symlink aerospace folder to ~/.config/aerospace
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/aerospace"
+    path: "{{ ansible_env.HOME }}/.config/aerospace"
+    state: link

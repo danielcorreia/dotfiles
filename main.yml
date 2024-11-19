@@ -13,6 +13,8 @@
 
     - ansible.builtin.import_tasks: playbooks/system.yml
 
+    - ansible.builtin.import_tasks: playbooks/aerospace.yml
+
     - ansible.builtin.import_tasks: playbooks/git.yml
 
     - ansible.builtin.import_tasks: playbooks/ohmyzsh.yml
