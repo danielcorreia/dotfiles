@@ -1,9 +1,4 @@
 ---
-- name: Install git package
-  community.general.homebrew:
-    name: git
-    state: present
-
 - name: Setup git config
   ansible.builtin.template:
     src: templates/gitconfig.j2

@@ -7,6 +7,7 @@
   loop:
     - fastfetch
     - fzf
+    - git
     - httpie
     - jq
     - neovim
