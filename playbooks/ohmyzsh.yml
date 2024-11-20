@@ -5,7 +5,7 @@
   register: ohmyzsh_dir
 
 - name: Install oh my zsh
-  when: not ohmyzsh_dir.stat.isdir
+  when: not ohmyzsh_dir.stat and not ohmyzsh_dir.stat.isdir
   ansible.builtin.shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
