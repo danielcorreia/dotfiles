@@ -20,17 +20,12 @@
     regexp: '^plugins=\('
     line: plugins=(git zsh-autosuggestions)
 
-- name: Add zsh aliases
-  ansible.builtin.template:
-    src: templates/aliases.j2
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/aliases.zsh"
-
-- name: Add zsh exports
-  ansible.builtin.template:
-    src: templates/exports.j2
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/exports.zsh"
-
-- name: Add zsh functions
-  ansible.builtin.template:
-    src: templates/functions.j2
-    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/functions.zsh"
+- name: Symlink aliases/exports/functions
+  with_items:
+    - aliases.zsh
+    - exports.zsh
+    - functions.zsh
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/{{ item }}"
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/{{ item }}"
+    state: link
