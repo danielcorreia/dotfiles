@@ -20,12 +20,12 @@
       prompt: Setup git? [y]/n
       private: false
 
-    - name: setup_ohmyzsh
-      prompt: Setup ohmyzsh? [y]/n
-      private: false
-
     - name: setup_config
       prompt: Setup configs? [y]/n
+      private: false
+
+    - name: setup_ohmyzsh
+      prompt: Setup ohmyzsh? [y]/n
       private: false
 
     - name: setup_node
@@ -42,11 +42,11 @@
     - ansible.builtin.include_tasks: playbooks/git.yml
       when: setup_git != "n"
 
-    - ansible.builtin.include_tasks: playbooks/ohmyzsh.yml
-      when: setup_ohmyzsh != "n"
-
     - ansible.builtin.include_tasks: playbooks/symlink-config.yml
       when: setup_config != "n"
+
+    - ansible.builtin.include_tasks: playbooks/ohmyzsh.yml
+      when: setup_ohmyzsh != "n"
 
     - ansible.builtin.include_tasks: playbooks/node.yml
       when: setup_node != "n"
