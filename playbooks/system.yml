@@ -57,6 +57,11 @@
     passphrase: ""
     type: ed25519
 
+- name: Ensure ~/.ssh exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+
 - name: Setup ssh config
   ansible.builtin.template:
     src: templates/sshconfig.j2
