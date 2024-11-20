@@ -9,10 +9,28 @@
   ansible.builtin.shell: |
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
+- name: Install powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh//custom/themes/powerlevel10k"
+    depth: 1
+
+- name: Configure powerlevel10k plugin
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    regexp: '^ZSH_THEME=\"'
+    line: ZSH_THEME="powerlevel10k/powerlevel10k"
+
 - name: Install zsh-autosuggestions
   ansible.builtin.git:
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    depth: 1
+
+- name: Ensure ~/.zshrc exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: file
 
 - name: Configure zsh-autosuggestions plugin
   ansible.builtin.lineinfile:
