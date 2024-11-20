@@ -22,7 +22,7 @@
     name: "{{ item }}"
     state: present
   loop:
-    - aerospace
+    - nikitabobko/tap/aerospace
     - alfred
     - docker
     - google-chrome
