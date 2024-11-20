@@ -5,13 +5,21 @@
     path: "{{ ansible_env.HOME }}/.config"
     state: directory
 
-- name: Symlink configurations to ~/.config
+- name: Symlink configurations to ~
+  with_items:
+    - .p10k.zsh
   ansible.builtin.file:
     src: "{{ playbook_dir }}/config/{{ item }}"
-    path: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    path: "{{ ansible_env.HOME }}/{{ item }}"
     state: link
+
+- name: Symlink configurations to ~/.config
   with_items:
     - aerospace
     - nvim
     - tmux
     - wezterm
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/{{ item }}"
+    path: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    state: link
