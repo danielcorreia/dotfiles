@@ -15,6 +15,11 @@
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh//custom/themes/powerlevel10k"
     depth: 1
 
+- name: Ensure ~/.zshrc exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: file
+
 - name: Configure powerlevel10k plugin
   ansible.builtin.lineinfile:
     path: "{{ ansible_env.HOME }}/.zshrc"
@@ -26,11 +31,6 @@
     repo: "https://github.com/zsh-users/zsh-autosuggestions"
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     depth: 1
-
-- name: Ensure ~/.zshrc exists
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.zshrc"
-    state: file
 
 - name: Configure zsh-autosuggestions plugin
   ansible.builtin.lineinfile:
