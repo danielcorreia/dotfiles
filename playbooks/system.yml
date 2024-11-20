@@ -9,9 +9,11 @@
     - fzf
     - httpie
     - jq
+    - neovim
     - python3
     - ripgrep
     - tldr
+    - tmux
     - tree
 
 - name: Install apps with brew
@@ -19,12 +21,14 @@
     name: "{{ item }}"
     state: present
   loop:
+    - aerospace
     - alfred
     - docker
     - google-chrome
     - iterm2
     - slack
     - spotify
+    - wezterm
     - whatsapp
 
 - name: Ensure ~/.config exists

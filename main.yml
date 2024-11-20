@@ -8,24 +8,48 @@
       prompt: What's your e-mail?
       private: false
 
+    - name: setup_system
+      prompt: Setup system (installs apps, …)? [y]/n
+      private: false
+
+    - name: setup_macos
+      prompt: Setup macos? [y]/n
+      private: false
+
+    - name: setup_git
+      prompt: Setup git? [y]/n
+      private: false
+
+    - name: setup_ohmyzsh
+      prompt: Setup ohmyzsh? [y]/n
+      private: false
+
+    - name: setup_config
+      prompt: Setup configs? [y]/n
+      private: false
+
+    - name: setup_node
+      prompt: Setup node? [y]/n
+      private: false
+
   tasks:
-    - ansible.builtin.import_tasks: playbooks/macos.yml
+    - ansible.builtin.include_tasks: playbooks/system.yml
+      when: setup_system != "n"
 
-    - ansible.builtin.import_tasks: playbooks/system.yml
+    - ansible.builtin.include_tasks: playbooks/macos.yml
+      when: setup_macos != "n"
 
-    - ansible.builtin.import_tasks: playbooks/aerospace.yml
+    - ansible.builtin.include_tasks: playbooks/git.yml
+      when: setup_git != "n"
 
-    - ansible.builtin.import_tasks: playbooks/wezterm.yml
+    - ansible.builtin.include_tasks: playbooks/ohmyzsh.yml
+      when: setup_ohmyzsh != "n"
 
-    - ansible.builtin.import_tasks: playbooks/git.yml
+    - ansible.builtin.include_tasks: playbooks/symlink-config.yml
+      when: setup_config != "n"
 
-    - ansible.builtin.import_tasks: playbooks/ohmyzsh.yml
-
-    - ansible.builtin.import_tasks: playbooks/tmux.yml
-
-    - ansible.builtin.import_tasks: playbooks/neovim.yml
-
-    - ansible.builtin.import_tasks: playbooks/node.yml
+    - ansible.builtin.include_tasks: playbooks/node.yml
+      when: setup_node != "n"
       vars:
         nvm: "v0.39.5"
         node: "v20.9.0"

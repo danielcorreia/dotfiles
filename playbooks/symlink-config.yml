@@ -1,0 +1,17 @@
+---
+
+- name: Ensure ~/.config exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config"
+    state: directory
+
+- name: Symlink configurations to ~/.config
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/{{ item }}"
+    path: "{{ ansible_env.HOME }}/.config/{{ item }}"
+    state: link
+  with_items:
+    - aerospace
+    - nvim
+    - tmux
+    - wezterm
