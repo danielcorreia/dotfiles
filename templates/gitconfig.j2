@@ -4,10 +4,21 @@
 [core]
 	excludesfile = /Users/danielcorreia/.gitignore
 	editor = nvim
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[include]
+	path = /Users/danielc/.config/delta/themes/tokyonight.gitconfig
+[delta]
+	navigate = true # use n and N to move between diff sections
+	dark = true
+	features = tokyonight-storm
 [push]
 	default = simple
+	autoSetupRemote = true
 [merge]
 	tool = vscode
+	conflictStyle = zdiff3
 [mergetool "vscode"]
 	cmd = code --wait $MERGED
 [mergetool]

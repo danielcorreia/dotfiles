@@ -8,6 +8,7 @@
     - fastfetch
     - fzf
     - git
+    - git-delta
     - httpie
     - jq
     - lazygit
