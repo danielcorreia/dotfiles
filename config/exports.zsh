@@ -25,3 +25,8 @@ export LESS_TERMCAP_md="${yellow}";
 # -F exit if text is less then one screen long
 # -R something related to colors
 export LESS=-iXFR
+
+# Where user-specific configuration files should be stored
+# XDG stands for X Desktop Group https://en.wikipedia.org/wiki/Freedesktop.org
+export XDG_CONFIG_HOME="$HOME/.config"
+

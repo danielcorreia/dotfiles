@@ -18,7 +18,6 @@
     - aerospace
     - nvim
     - tmux
-    - wezterm
   ansible.builtin.file:
     src: "{{ playbook_dir }}/config/{{ item }}"
     path: "{{ ansible_env.HOME }}/.config/{{ item }}"
