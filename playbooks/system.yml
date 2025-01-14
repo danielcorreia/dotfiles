@@ -10,6 +10,7 @@
     - git
     - httpie
     - jq
+    - lazygit
     - neovim
     - python3
     - ripgrep

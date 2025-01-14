@@ -1,0 +1,12 @@
+gui:
+  nerdFontsVersion: "3"
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+keybinding:
+  universal:
+    nextBlock-alt2: ''
+    prevBlock-alt2: ''
+    nextTab: <tab>
+    prevTab: <backtab>
