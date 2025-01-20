@@ -26,11 +26,11 @@
   loop:
     - alfred
     - docker
+    - ghostty
     - google-chrome
     - rectangle
     - slack
     - spotify
-    - wezterm
     - whatsapp
 
 - name: Ensure ~/.config exists
