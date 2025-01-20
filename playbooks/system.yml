@@ -24,10 +24,10 @@
     name: "{{ item }}"
     state: present
   loop:
-    - nikitabobko/tap/aerospace
     - alfred
     - docker
     - google-chrome
+    - rectangle
     - slack
     - spotify
     - wezterm
