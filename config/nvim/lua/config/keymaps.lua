@@ -1,8 +1,8 @@
--- Set leader key to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+-- [[ Basic Keymaps ]]
+--  See `:help vim.keymap.set()`
 
 -- Clear highlights on search when pressing <Esc> in normal mode
+--  See `:help hlsearch`
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
@@ -31,30 +31,30 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- -- Automatically indent when moving lines up/down
--- vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
--- vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
---
--- -- Center when moving up/down
--- vim.keymap.set("n", "<C-d>", "<C-d>zz")
--- vim.keymap.set("n", "<C-u>", "<C-u>zz")
---
--- -- Keep cursor in the middle when moving through searched items
--- vim.keymap.set("n", "n", "nzzzv")
--- vim.keymap.set("n", "N", "Nzzzv")
---
--- -- Quickfix navigation
--- vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
---
--- -- Make a file executable
--- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
---
--- -- Move back/forward buffer
--- vim.keymap.set("n", "<leader>h", "<cmd>bprevious<CR>")
--- vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>")
---
--- -- Open new tmux window
--- vim.keymap.set("n", "<C-f>", ":silent ! tmux neww tmux-sessionizer")
+-- Center when moving up/down
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+-- Keep cursor in the middle when moving through searched items
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Quickfix navigation
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
+vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- Automatically indent when moving lines up/down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Move back/forward buffer
+vim.keymap.set("n", "<leader>h", "<cmd>bprevious<CR>")
+vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>")
+
+-- Make a file executable
+vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+-- Open new tmux window
+vim.keymap.set("n", "<C-f>", ":silent ! tmux neww tmux-sessionizer")
