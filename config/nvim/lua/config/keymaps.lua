@@ -56,5 +56,5 @@ vim.keymap.set("n", "<leader>l", "<cmd>bnext<CR>")
 -- Make a file executable
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
--- Open new tmux window
-vim.keymap.set("n", "<C-f>", ":silent ! tmux neww tmux-sessionizer")
+-- Open new tmux 'sessionizer'
+vim.keymap.set("n", "<C-f>", ":silent ! tmux neww tmux-sessionizer<CR>")
