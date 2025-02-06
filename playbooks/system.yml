@@ -5,14 +5,20 @@
     state: present
     update_homebrew: true
   loop:
+    - bash
+    - bc
+    - coreutils
     - fastfetch
     - fzf
+    - gawk
     - git
     - git-delta
+    - gh
     - httpie
     - jq
     - lazygit
     - neovim
+    - nowplaying-cli
     - python3
     - ripgrep
     - tldr
