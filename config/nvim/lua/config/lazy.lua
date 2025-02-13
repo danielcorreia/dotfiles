@@ -23,23 +23,25 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
-	require("plugins.which-key"),
-	require("plugins.telescope"),
-	require("plugins.lsp"),
-	require("plugins.conform"),
-	require("plugins.nvim-cmp"),
-	require("plugins.tokyonight"),
-	require("plugins.todo-comments"),
-	require("plugins.minivim"),
-	require("plugins.treesitter"),
 	-- require 'plugins.debug',
-	require("plugins.indent_line"),
-	-- require 'plugins.lint',
 	require("plugins.autopairs"),
-	require("plugins.neo-tree"),
-	require("plugins.gitsigns"),
+	require("plugins.conform"),
 	require("plugins.dashboard-nvim"),
+	require("plugins.gitsigns"),
+	require("plugins.harpoon"),
+	require("plugins.indent_line"),
+	require("plugins.lint"),
+	require("plugins.lsp"),
+	require("plugins.minivim"),
+	require("plugins.neo-tree"),
+	require("plugins.nvim-cmp"),
+	require("plugins.telescope"),
 	require("plugins.tmux-navigator"),
+	require("plugins.todo-comments"),
+	require("plugins.tokyonight"),
+	require("plugins.treesitter"),
+	require("plugins.trouble"),
+	require("plugins.which-key"),
 }, {
 	ui = {
 		-- If you are using a Nerd Font: set icons to an empty table which will use the
