@@ -30,3 +30,5 @@ export LESS=-iXFR
 # XDG stands for X Desktop Group https://en.wikipedia.org/wiki/Freedesktop.org
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# I don't want Husky ever to run locally
+export HUSKY=0
