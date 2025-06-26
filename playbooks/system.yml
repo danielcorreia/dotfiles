@@ -11,9 +11,10 @@
     - fastfetch
     - fzf
     - gawk
+    - gh
     - git
     - git-delta
-    - gh
+    - gnupg
     - httpie
     - jq
     - lazygit
@@ -21,6 +22,7 @@
     - nowplaying-cli
     - python3
     - ripgrep
+    - stow
     - tldr
     - tmux
     - tree
