@@ -59,16 +59,16 @@
     repo: https://github.com/danielcorreia/toolx.git
     dest: "{{ ansible_env.HOME }}/personal/bin"
 
+- name: Ensure ~/.ssh exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.ssh"
+    state: directory
+
 - name: Generate ssh key
   community.crypto.openssh_keypair:
     path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
     passphrase: ""
     type: ed25519
-
-- name: Ensure ~/.ssh exists
-  ansible.builtin.file:
-    path: "{{ ansible_env.HOME }}/.ssh"
-    state: directory
 
 - name: Setup ssh config
   ansible.builtin.template:
