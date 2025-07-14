@@ -3,9 +3,6 @@
   loop:
     - { src: 'p10k.zsh', dest: '.p10k.zsh' }
     - { src: 'zshrc', dest: '.zshrc' }
-    - { src: 'aliases.zsh', dest: '.aliases' }
-    - { src: 'exports.zsh', dest: '.exports' }
-    - { src: 'functions.zsh', dest: '.functions' }
   ansible.builtin.file:
     src: "{{ playbook_dir }}/config/{{ item.src }}"
     path: "{{ ansible_env.HOME }}/{{ item.dest }}"

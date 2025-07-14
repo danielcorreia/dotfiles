@@ -33,7 +33,6 @@
     state: present
   loop:
     - alfred
-    - docker
     - ghostty
     - google-chrome
     - rectangle

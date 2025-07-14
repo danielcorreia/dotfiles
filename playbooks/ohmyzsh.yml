@@ -30,3 +30,9 @@
     src: "{{ playbook_dir }}/config/{{ item }}"
     path: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/{{ item }}"
     state: link
+
+- name: Ensure private exports file exist
+  ansible.builtin.copy:
+    content: ""
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/private-exports.zsh"
+    force: false
