@@ -4,7 +4,9 @@ Inspired by other excellent dotfiles projects around the world wide web.
 
 ## Setup
 
-Clone this project and execute `./bootstrap`.
+Open terminal and run this command
+
+`bash <(curl -S https://raw.githubusercontent.com/danielcorreia/dotfiles/refs/heads/master/bootstrap)`
 
 ---
 
