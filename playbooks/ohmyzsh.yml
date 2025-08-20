@@ -21,6 +21,15 @@
     dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
     depth: 1
 
+- name: Symlink configurations to ~
+  loop:
+    - { src: 'p10k.zsh', dest: '.p10k.zsh' }
+    - { src: 'zshrc', dest: '.zshrc' }
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/{{ item.src }}"
+    path: "{{ ansible_env.HOME }}/{{ item.dest }}"
+    state: link
+
 - name: Symlink aliases/exports/functions
   with_items:
     - aliases.zsh
