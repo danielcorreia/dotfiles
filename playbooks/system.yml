@@ -9,6 +9,7 @@
     - bc
     - coreutils
     - fastfetch
+    - fd
     - fzf
     - gawk
     - gh
