@@ -5,6 +5,6 @@
     dest: "{{ ansible_env.HOME }}/.gitconfig"
 
 - name: Create git global gitignore file
-  ansible.builtin.template:
-    src: templates/gitignore.j2
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/gitignore"
     dest: "{{ ansible_env.HOME }}/.gitignore"
