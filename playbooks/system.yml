@@ -76,7 +76,7 @@
     type: ed25519
 
 - name: Setup ssh config
-  ansible.builtin.template:
-    src: templates/sshconfig.j2
-    dest: "{{ ansible_env.HOME }}/.ssh/config"
-
+  ansible.builtin.file:
+    src: "{{ playbook_dir }}/config/ssh-config"
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    state: link
