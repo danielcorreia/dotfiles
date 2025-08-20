@@ -14,7 +14,9 @@
     - gh
     - git
     - git-delta
+    - glab
     - gnupg
+    - gsed
     - httpie
     - jq
     - lazygit
@@ -39,6 +41,8 @@
     - slack
     - spotify
     - whatsapp
+    - font-monaspace-nerd-font
+    - font-noto-sans-symbols-2
 
 - name: Ensure ~/.config exists
   ansible.builtin.file:
