@@ -41,6 +41,7 @@ require("lazy").setup({
 	require("plugins.tokyonight"),
 	require("plugins.treesitter"),
 	require("plugins.trouble"),
+	require("plugins.undotree"),
 	require("plugins.which-key"),
 }, {
 	ui = {
