@@ -72,7 +72,7 @@
 
 - name: Generate ssh key
   community.crypto.openssh_keypair:
-    path: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
+    path: "{{ ansible_env.HOME }}/.ssh/dc_ed25519"
     passphrase: ""
     type: ed25519
 

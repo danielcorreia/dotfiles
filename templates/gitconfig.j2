@@ -2,13 +2,13 @@
 	name = Daniel Correia
 	email = {{ email }}
 [core]
-	excludesfile = /Users/danielcorreia/.gitignore
+	excludesfile = {{ ansible_env.HOME }}/.gitignore
 	editor = nvim
 	pager = delta
 [interactive]
 	diffFilter = delta --color-only
 [include]
-	path = /Users/danielc/.config/delta/themes/tokyonight.gitconfig
+	path = {{ ansible_env.HOME }}/.config/delta/themes/tokyonight.gitconfig
 [delta]
 	navigate = true # use n and N to move between diff sections
 	dark = true
