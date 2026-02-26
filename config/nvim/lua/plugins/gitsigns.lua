@@ -11,8 +11,8 @@ return {
 				vim.keymap.set(mode, l, r, opts)
 			end
 
-			map("n", "<leader>B", gitsigns.blame, { desc = "Display [B]lame" })
-			map("n", "<leader>b", gitsigns.toggle_current_line_blame, { desc = "Toggle current line [b]lame" })
+			map("n", "<leader>gB", gitsigns.blame, { desc = "Display [B]lame" })
+			map("n", "<leader>gb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line [b]lame" })
 		end,
 	},
 }
