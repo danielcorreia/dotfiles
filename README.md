@@ -25,6 +25,8 @@ Exported by `config/exports.zsh`:
 | `GREP_OPTIONS` | `--color=auto` | Always enable coloured grep output |
 | `LESS` | `-iXFR` | Less pager options (case-insensitive, no clear on exit, quit if one screen, raw colours) |
 
+Private or sensitive env vars (API keys, tokens, work-specific paths) go in `~/.config/private_exports.zsh`, which is sourced at shell startup but never committed to this repository.
+
 ---
 
 Daniel Correia
