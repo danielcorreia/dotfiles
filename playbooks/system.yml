@@ -63,7 +63,23 @@
 - name: Clone my bin tools
   ansible.builtin.git:
     repo: https://github.com/danielcorreia/toolx.git
-    dest: "{{ ansible_env.HOME }}/personal/bin"
+    dest: "{{ ansible_env.HOME }}/personal/toolx"
+
+- name: Ensure ~/personal/bin exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/personal/bin"
+    state: directory
+
+- name: Symlink toolx binaries to ~/personal/bin
+  ansible.builtin.file:
+    src: "{{ ansible_env.HOME }}/personal/toolx/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/personal/bin/{{ item }}"
+    state: link
+  loop:
+    - branch-teleport
+    - git-stand-up
+    - pjscripts
+    - tmux-sessionizer
 
 - name: Ensure ~/.ssh exists
   ansible.builtin.file:
