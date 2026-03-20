@@ -18,3 +18,6 @@
 
     - name: Install yarn
       ansible.builtin.shell: corepack enable
+
+    - name: Install markdownlint-cli
+      ansible.builtin.shell: '. "$HOME/.nvm/nvm.sh" && npm install -g markdownlint-cli'

@@ -6,12 +6,24 @@ return {
 		vim.env.ESLINT_D_PPID = vim.fn.getpid()
 
 		local lint = require("lint")
+
+		local function filter_available(linters)
+			return vim.tbl_filter(function(name)
+				local linter = lint.linters[name]
+				if not linter then
+					return false
+				end
+				local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
+				return vim.fn.executable(cmd) == 1
+			end, linters)
+		end
+
 		lint.linters_by_ft = {
-			markdown = { "markdownlint" },
-			typescript = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			javascript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
+			markdown = filter_available({ "markdownlint" }),
+			typescript = filter_available({ "eslint_d" }),
+			typescriptreact = filter_available({ "eslint_d" }),
+			javascript = filter_available({ "eslint_d" }),
+			javascriptreact = filter_available({ "eslint_d" }),
 		}
 
 		-- To allow other plugins to add linters to require('lint').linters_by_ft,
