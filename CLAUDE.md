@@ -1,0 +1,177 @@
+# CLAUDE.md
+
+This file provides guidance for AI assistants working in this repository.
+
+## Repository Overview
+
+This is a macOS dotfiles repository managed with **Ansible**. It automates the full setup of a development workstation: installing packages via Homebrew, configuring shell, editor, terminal multiplexer, and git, and symlinking config files into the right places.
+
+## Repository Structure
+
+```
+dotfiles/
+├── bootstrap              # Bash entry point: installs Homebrew + Ansible, then runs main.yml
+├── main.yml               # Ansible playbook: prompts user, symlinks configs, includes sub-playbooks
+├── ansible.cfg            # Ansible config (suppresses localhost and inventory warnings)
+├── config/                # All dotfiles / config files (symlinked during setup)
+│   ├── aliases.zsh        # Shell aliases (sourced by oh-my-zsh as custom plugin)
+│   ├── exports.zsh        # Environment variable exports
+│   ├── functions.zsh      # Shell functions
+│   ├── zshrc              # Main zsh config (oh-my-zsh, powerlevel10k, NVM, keybinds)
+│   ├── p10k.zsh           # Powerlevel10k prompt config
+│   ├── gitignore          # Global gitignore (.DS_Store, .vscode/)
+│   ├── ssh-config         # SSH config (GitHub using dc_ed25519 key)
+│   ├── delta/themes/      # git-delta Tokyo Night theme
+│   ├── ghostty/config     # Ghostty terminal config
+│   ├── lazygit/config.yml # Lazygit config
+│   ├── tmux/tmux.conf     # tmux config
+│   └── nvim/              # Neovim config (Lua, lazy.nvim-based)
+├── playbooks/             # Ansible task files included by main.yml
+│   ├── system.yml         # Homebrew packages, casks, directories, toolx, SSH key
+│   ├── macos.yml          # macOS defaults (Dock, Finder, keyboard, scroll)
+│   ├── git.yml            # Renders gitconfig.j2 template, links global gitignore
+│   ├── ohmyzsh.yml        # oh-my-zsh + powerlevel10k + zsh-autosuggestions install
+│   └── node.yml           # NVM + Node v20.9.0 + yarn (corepack) + markdownlint-cli
+└── templates/
+    └── gitconfig.j2       # Jinja2 template for ~/.gitconfig (uses {{ email }} var)
+```
+
+## How Setup Works
+
+1. **Entry point**: `bash <(curl -S https://raw.githubusercontent.com/danielcorreia/dotfiles/refs/heads/master/bootstrap)`
+2. **Bootstrap** installs Homebrew (if missing), installs Ansible (if missing), then runs `ansible-playbook main.yml`.
+3. **main.yml** prompts for email and which components to set up, ensures `~/.config` exists, symlinks `config/nvim`, `config/tmux`, and `config/ghostty` into `~/.config/`, then conditionally runs the sub-playbooks.
+4. Each sub-playbook is idempotent — safe to re-run.
+
+### Symlink Layout (post-install)
+
+| Dotfiles path | Linked to |
+|---|---|
+| `config/nvim` | `~/.config/nvim` |
+| `config/tmux` | `~/.config/tmux` |
+| `config/ghostty` | `~/.config/ghostty` |
+| `config/zshrc` | `~/.zshrc` |
+| `config/p10k.zsh` | `~/.p10k.zsh` |
+| `config/aliases.zsh` | `~/.oh-my-zsh/custom/aliases.zsh` |
+| `config/exports.zsh` | `~/.oh-my-zsh/custom/exports.zsh` |
+| `config/functions.zsh` | `~/.oh-my-zsh/custom/functions.zsh` |
+| `config/ssh-config` | `~/.ssh/config` |
+| `config/gitignore` | `~/.gitignore` |
+| `templates/gitconfig.j2` → rendered | `~/.gitconfig` |
+
+## Key Conventions
+
+### Ansible Playbooks
+- All playbooks are **task files** (list of tasks, not full playbooks) included via `ansible.builtin.include_tasks`.
+- Use `ansible.builtin.file` with `state: link` for all symlinks.
+- `community.general.homebrew` and `community.general.homebrew_cask` for package installation.
+- `community.general.osx_defaults` for macOS system preferences.
+- Variables are passed via `-e` flag or `vars_prompt` in `main.yml`.
+- The `ansible.cfg` suppresses `localhost_warning` and `inventory_unparsed_warning`.
+
+### Shell Configuration
+- Shell: **zsh** with **oh-my-zsh** + **powerlevel10k** theme.
+- Plugins loaded: `git`, `zsh-autosuggestions`.
+- Custom zsh files live in `config/` and are symlinked into `~/.oh-my-zsh/custom/`.
+- **Private/sensitive env vars** go in `~/.oh-my-zsh/custom/private-exports.zsh` — this file is created empty by the playbook and is never committed.
+- Key bindings in zshrc: `Ctrl+F` → `tmux-sessionizer`, `Ctrl+B` → `branch-teleport`.
+
+### Environment Variables (`config/exports.zsh`)
+| Variable | Value |
+|---|---|
+| `PATH` | `$HOME/personal/bin:$PATH` |
+| `EDITOR` | `nvim` |
+| `XDG_CONFIG_HOME` | `$HOME/.config` |
+| `HUSKY` | `0` (disables Husky git hooks) |
+| `LANG` / `LC_ALL` | `en_GB.UTF-8` |
+| `LESS` | `-iXFR` |
+
+### Git Configuration
+- Generated from `templates/gitconfig.j2` using Ansible templating.
+- Diff pager: **delta** with the Tokyo Night Storm theme.
+- Merge/diff tool: **VSCode**.
+- `branch.sort = -committerdate` (most recently committed branches first).
+- `push.autoSetupRemote = true`.
+- Key aliases: `lg` (pretty graph log), `last`, `logbr` (first-parent), `undo` (reset HEAD~).
+- Global gitignore ignores `.DS_Store` and `.vscode/`.
+- SSH key: `~/.ssh/dc_ed25519` (ed25519, generated by system.yml).
+
+### Neovim (`config/nvim/`)
+- Plugin manager: **lazy.nvim** (bootstrap in `lua/config/lazy.lua`).
+- Leader key: `<Space>`.
+- Config entry: `init.lua` → loads `config.options`, `config.keymaps`, `config.autocmds`, `config.lazy`.
+- Indentation: 2-space tabs (see modeline `ts=2 sts=2 sw=2 et`).
+
+**Active LSP servers** (managed by Mason):
+- `ts_ls` — TypeScript/JavaScript
+- `lua_ls` — Lua
+
+**Formatters** (conform.nvim, runs on save):
+- Lua: `stylua`
+- JS/TS/JSX/TSX: `eslint_d` + `prettier`
+
+**Linters** (nvim-lint, skips tools not installed):
+- Markdown: `markdownlint`
+- JS/TS/JSX/TSX: `eslint_d`
+
+**Key plugins**: telescope, treesitter, neo-tree, harpoon, gitsigns, trouble, todo-comments, which-key, autopairs, undotree, tmux-navigator, tokyonight colorscheme, blink.cmp (completion), dashboard-nvim.
+
+**Key mappings**:
+- `<leader>f` — format buffer
+- `<leader>rn` — LSP rename
+- `<leader>ca` — code action
+- `gd` / `gr` / `gI` — goto definition / references / implementation (via telescope)
+- `<C-f>` — open tmux sessionizer
+- `<C-h/j/k/l>` — window navigation
+
+### tmux (`config/tmux/tmux.conf`)
+- Prefix: `Ctrl+A` (replaces default `Ctrl+B`).
+- Plugin manager: **TPM** (auto-installs plugins on first launch).
+- Theme: **Tokyo Night Storm** (`janoamaral/tokyo-night-tmux`).
+- Status bar: top position, shows battery, music (nowplaying-cli), net speed.
+- Splits: `prefix+\` (horizontal), `prefix+-` (vertical).
+- Sessionizer: `prefix+f` → runs `tmux-sessionizer`.
+- Music controls: `prefix+Space` (play/pause), `prefix+Right/Left` (next/prev).
+- vim-tmux-navigator for seamless nvim↔tmux pane switching.
+
+### Personal Bin Tools (`~/personal/toolx/`)
+Cloned from `https://github.com/danielcorreia/toolx.git` and symlinked into `~/personal/bin/`:
+- `branch-teleport` — interactive git branch switcher (`Ctrl+B` in zsh)
+- `git-stand-up` — shows recent git activity
+- `pjscripts` — project scripts helper
+- `tmux-sessionizer` — fuzzy-find and create tmux sessions (`Ctrl+F` in zsh / `prefix+f` in tmux)
+
+## Development Workflow
+
+### Making Changes
+1. Edit files under `config/` or `playbooks/` directly — changes are live immediately since they are symlinked.
+2. For new config directories, add a symlink task in `main.yml` (following the existing pattern).
+3. For new brew packages, add to the `loop` list in `playbooks/system.yml`.
+4. For new toolx binaries, add to the symlink loop in `playbooks/system.yml`.
+
+### Running the Playbook
+```bash
+# Full setup (interactive prompts)
+ansible-playbook main.yml
+
+# Non-interactive (skip prompts using extra vars)
+ansible-playbook main.yml -e "email=you@example.com setup_system=y setup_macos=n setup_git=y setup_ohmyzsh=y setup_node=y"
+
+# Pre-set email via env var (bootstrap reads this)
+DOTFILES_EMAIL=you@example.com bash bootstrap
+```
+
+### Adding New Neovim Plugins
+Create a new file in `config/nvim/lua/plugins/<name>.lua` returning a lazy.nvim plugin spec table. The file is auto-discovered by lazy.nvim.
+
+### Commit Style
+Commits follow conventional commits: `type(scope): message`
+- Types seen: `feat`, `fix`, `docs`
+- Examples: `feat(ansible): install markdownlint-cli via npm`, `fix(nvim): skip linters whose executables are not installed`
+
+## What Not to Change
+
+- `config/p10k.zsh` — generated by `p10k configure`; edit via the interactive wizard, not manually.
+- `config/nvim/lazy-lock.json` — auto-managed by lazy.nvim; update with `:Lazy update` inside Neovim.
+- `~/.oh-my-zsh/custom/private-exports.zsh` — never committed; contains sensitive values.
+- The `bootstrap` script path/URL is referenced in the README and should remain stable.
