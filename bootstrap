@@ -17,9 +17,31 @@ if [ -z $ansible_playbook ]; then
   brew install ansible
 fi;
 
-# $user_email must exist to be passed to ansible
-# either empty string OR email provided
-user_email=$([ -z "$DOTFILES_EMAIL" ] && echo "" || echo "email=$DOTFILES_EMAIL")
+# Load saved config if it exists (skips prompts on subsequent runs)
+CONFIG_FILE="$HOME/.dotfiles.conf"
+if [ -f "$CONFIG_FILE" ]; then
+  source "$CONFIG_FILE"
+fi
 
-ansible-playbook main.yml \
-  -e "$user_email"
+# Build extra vars — only pass non-empty values so vars_prompt still fires for missing ones
+extra_vars=()
+
+email="${DOTFILES_EMAIL:-}"
+[ -n "$email" ] && extra_vars+=("-e" "email=$email")
+
+setup_system="${DOTFILES_SETUP_SYSTEM:-}"
+[ -n "$setup_system" ] && extra_vars+=("-e" "setup_system=$setup_system")
+
+setup_macos="${DOTFILES_SETUP_MACOS:-}"
+[ -n "$setup_macos" ] && extra_vars+=("-e" "setup_macos=$setup_macos")
+
+setup_git="${DOTFILES_SETUP_GIT:-}"
+[ -n "$setup_git" ] && extra_vars+=("-e" "setup_git=$setup_git")
+
+setup_ohmyzsh="${DOTFILES_SETUP_OHMYZSH:-}"
+[ -n "$setup_ohmyzsh" ] && extra_vars+=("-e" "setup_ohmyzsh=$setup_ohmyzsh")
+
+setup_node="${DOTFILES_SETUP_NODE:-}"
+[ -n "$setup_node" ] && extra_vars+=("-e" "setup_node=$setup_node")
+
+ansible-playbook main.yml "${extra_vars[@]}"
