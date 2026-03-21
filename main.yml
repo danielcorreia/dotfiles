@@ -71,5 +71,5 @@
           DOTFILES_SETUP_GIT="{{ setup_git }}"
           DOTFILES_SETUP_OHMYZSH="{{ setup_ohmyzsh }}"
           DOTFILES_SETUP_NODE="{{ setup_node }}"
-        dest: "{{ ansible_env.HOME }}/.dotfiles.conf"
+        dest: "{{ ansible_env.HOME }}/.config/dotfiles.conf"
         mode: '0600'
