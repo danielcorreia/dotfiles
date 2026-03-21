@@ -61,3 +61,15 @@
       vars:
         nvm: "v0.39.5"
         node: "v20.9.0"
+
+    - name: Save configuration for future runs
+      ansible.builtin.copy:
+        content: |
+          DOTFILES_EMAIL="{{ email }}"
+          DOTFILES_SETUP_SYSTEM="{{ setup_system }}"
+          DOTFILES_SETUP_MACOS="{{ setup_macos }}"
+          DOTFILES_SETUP_GIT="{{ setup_git }}"
+          DOTFILES_SETUP_OHMYZSH="{{ setup_ohmyzsh }}"
+          DOTFILES_SETUP_NODE="{{ setup_node }}"
+        dest: "{{ ansible_env.HOME }}/.config/dotfiles.conf"
+        mode: '0600'
